@@ -1,0 +1,41 @@
+<?php
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Kategori;
+use App\Models\Resep;
+use Illuminate\Support\Facades\Hash;
+
+class DatabaseSeeder extends Seeder {
+    public function run(): void {
+        // Admin
+        User::create(['name'=>'Admin RasaNusantara','email'=>'admin@rasanusantara.id','password'=>Hash::make('password'),'role'=>'admin']);
+        User::create(['name'=>'Budi Santoso','email'=>'budi@example.com','password'=>Hash::make('password'),'role'=>'user']);
+        User::create(['name'=>'Siti Rahayu','email'=>'siti@example.com','password'=>Hash::make('password'),'role'=>'user']);
+
+        // Kategori
+        $kategoris = [
+            ['nama'=>'Jawa','icon'=>'🏛️','deskripsi'=>'Masakan khas Jawa dengan cita rasa manis dan gurih','gambar'=>'/images/cat/jawa.jpg'],
+            ['nama'=>'Padang','icon'=>'🌶️','deskripsi'=>'Masakan Minang dengan bumbu rempah kaya dan pedas','gambar'=>'/images/cat/padang.jpg'],
+            ['nama'=>'Bali','icon'=>'🌺','deskripsi'=>'Masakan Bali dengan aroma rempah khas dan segar','gambar'=>'/images/cat/bali.jpg'],
+            ['nama'=>'Sulawesi','icon'=>'🐟','deskripsi'=>'Masakan Sulawesi dengan dominasi seafood dan rempah'],
+            ['nama'=>'Kalimantan','icon'=>'🌿','deskripsi'=>'Masakan Kalimantan dengan bahan-bahan alam khas hutan tropis'],
+            ['nama'=>'Sumatera','icon'=>'🥘','deskripsi'=>'Masakan Sumatera dengan bumbu kuat dan kaya rempah'],
+        ];
+        foreach ($kategoris as $k) Kategori::create($k);
+
+        // Resep
+        $reseps = [
+            ['kategori_id'=>2,'judul'=>'Rendang Daging Sapi','asal_daerah'=>'Padang, Sumatera Barat','tingkat_kesulitan'=>'sulit','waktu_memasak'=>180,'porsi'=>6,'gambar'=>'/images/menu/rendang.jpg','deskripsi'=>'Rendang adalah masakan daging sapi yang dimasak perlahan dengan santan dan rempah hingga kering dan berwarna coklat kehitaman. Merupakan salah satu masakan terlezat di dunia.','bahan'=>['1 kg daging sapi','500 ml santan kental','5 lembar daun jeruk','3 batang serai','2 cm lengkuas','10 cabai merah keriting','8 bawang merah','5 bawang putih','2 cm jahe','1 sdt kunyit','garam secukupnya'],'langkah'=>['Haluskan bumbu: cabai, bawang merah, bawang putih, jahe, kunyit.','Tumis bumbu halus hingga harum bersama serai, lengkuas, daun jeruk.','Masukkan daging sapi, aduk rata.','Tuangkan santan kental, masak dengan api sedang sambil terus diaduk.','Masak hingga santan meresap dan daging berwarna coklat kehitaman, sekitar 2-3 jam.','Koreksi rasa, angkat dan sajikan.']],
+            ['kategori_id'=>1,'judul'=>'Nasi Goreng Spesial','asal_daerah'=>'Jakarta, DKI Jakarta','tingkat_kesulitan'=>'mudah','waktu_memasak'=>20,'porsi'=>2,'gambar'=>'/images/menu/nasi_goreng.jpg','deskripsi'=>'Nasi goreng adalah masakan nasi yang digoreng dan diaduk dalam minyak goreng panas, biasanya dengan bumbu kecap manis, bawang putih, dan kecap asin.','bahan'=>['2 piring nasi putih','2 butir telur','3 siung bawang putih','5 bawang merah','2 sdm kecap manis','1 sdm saus tiram','cabai sesuai selera','garam dan merica secukupnya','minyak goreng'],'langkah'=>['Haluskan bawang merah, bawang putih, dan cabai.','Tumis bumbu halus hingga harum.','Masukkan telur, orak-arik.','Masukkan nasi, aduk rata.','Bumbui dengan kecap manis, saus tiram, garam, dan merica.','Aduk rata, masak hingga nasi sedikit kering.','Sajikan dengan pelengkap.']],
+            ['kategori_id'=>1,'judul'=>'Soto Ayam Lamongan','asal_daerah'=>'Lamongan, Jawa Timur','tingkat_kesulitan'=>'sedang','waktu_memasak'=>60,'porsi'=>4,'gambar'=>'/images/menu/soto.jpg','deskripsi'=>'Soto ayam khas Lamongan dengan kuah bening kekuningan yang segar, dilengkapi suwiran ayam, telur, dan lontong.','bahan'=>['1 ekor ayam kampung','8 bawang merah','5 bawang putih','2 cm kunyit','2 cm jahe','2 batang serai','3 lembar daun salam','4 lembar daun jeruk','2 liter air','garam dan penyedap'],'langkah'=>['Rebus ayam hingga empuk, angkat dan suwir daging.','Tumis bumbu halus hingga harum.','Masukkan bumbu ke kaldu ayam.','Tambahkan serai, daun salam, daun jeruk.','Masak hingga mendidih, koreksi rasa.','Sajikan dengan suwiran ayam, telur, dan pelengkap.']],
+            ['kategori_id'=>3,'judul'=>'Ayam Betutu Bali','asal_daerah'=>'Gianyar, Bali','tingkat_kesulitan'=>'sulit','waktu_memasak'=>240,'porsi'=>4,'gambar'=>'/images/menu/ayam_betutu.jpg','deskripsi'=>'Ayam betutu adalah masakan khas Bali berupa ayam utuh yang dibumbui dengan base genep (bumbu lengkap) khas Bali kemudian dipanggang atau dikukus.','bahan'=>['1 ekor ayam utuh','10 cabai merah','8 bawang merah','6 bawang putih','3 cm kunyit','2 cm jahe','2 cm kencur','1 cm lengkuas','5 kemiri','daun salam','serai'],'langkah'=>['Haluskan semua bumbu base genep.','Lumuri ayam dengan bumbu, masukkan juga ke dalam rongga ayam.','Diamkan minimal 2 jam agar bumbu meresap.','Bungkus ayam dengan daun pisang.','Panggang atau kukus selama 3-4 jam hingga matang.','Sajikan dengan nasi dan sambal matah.']],
+            ['kategori_id'=>1,'judul'=>'Gado-Gado Jakarta','asal_daerah'=>'Jakarta, DKI Jakarta','tingkat_kesulitan'=>'mudah','waktu_memasak'=>30,'porsi'=>4,'gambar'=>'/images/menu/gado_gado.jpg','deskripsi'=>'Gado-gado adalah salad Indonesia dengan berbagai macam sayuran rebus, tahu, tempe, dan telur yang disiram saus kacang yang khas.','bahan'=>['2 ikat kangkung','1 buah tahu','1 papan tempe','2 butir telur','100g tauge','1 buah timun','150g kacang tanah','5 cabai merah','3 bawang putih','2 sdm gula merah','garam dan air jeruk limau'],'langkah'=>['Rebus sayuran, tahu, tempe, dan telur masing-masing.','Goreng kacang tanah hingga keemasan, haluskan.','Tumis cabai dan bawang putih, haluskan bersama kacang.','Tambahkan gula merah, garam, dan air jeruk, masak kental.','Tata semua bahan di piring.','Siram dengan saus kacang.']],
+            ['kategori_id'=>1,'judul'=>'Sate Ayam Madura','asal_daerah'=>'Madura, Jawa Timur','tingkat_kesulitan'=>'sedang','waktu_memasak'=>45,'porsi'=>4,'gambar'=>'/images/menu/sate.jpg','deskripsi'=>'Sate ayam khas Madura dengan bumbu kacang manis gurih yang kental dan lontong hangat.','bahan'=>['500g daging ayam','50 tusuk sate','150g kacang tanah','5 bawang merah','3 bawang putih','5 cabai merah','2 sdm kecap manis','gula merah','air jeruk limau','garam'],'langkah'=>['Potong daging ayam dadu kecil, tusuk ke tusukan sate.','Bumuri dengan bumbu dasar, marinasi 30 menit.','Bakar sate di atas bara api sambil dikipas.','Haluskan kacang, tumis dengan bumbu.','Tambahkan kecap manis dan air, masak kental.','Sajikan sate dengan bumbu kacang dan lontong.']],
+            ['kategori_id'=>6,'judul'=>'Rawon Surabaya','asal_daerah'=>'Surabaya, Jawa Timur','tingkat_kesulitan'=>'sedang','waktu_memasak'=>90,'porsi'=>4,'gambar'=>'/images/menu/rawon.jpg','deskripsi'=>'Rawon adalah sup daging khas Surabaya dengan kuah hitam dari kluwek yang kaya rempah dan berasa dalam.','bahan'=>['500g daging sandung lamur','4 buah kluwek','8 bawang merah','5 bawang putih','3 cm lengkuas','2 batang serai','4 lembar daun jeruk','2 cm kunyit','1 sdt ketumbar','garam dan merica'],'langkah'=>['Rebus daging hingga empuk, potong dadu.','Sangrai dan haluskan kluwek bersama bumbu lainnya.','Tumis bumbu halus hingga harum.','Masukkan bumbu ke kaldu daging.','Masak hingga mendidih dan kuah berubah gelap.','Koreksi rasa, sajikan dengan tauge dan telur asin.']],
+            ['kategori_id'=>1,'judul'=>'Bakso Malang','asal_daerah'=>'Malang, Jawa Timur','tingkat_kesulitan'=>'sedang','waktu_memasak'=>60,'porsi'=>6,'gambar'=>'/images/menu/bakso.jpg','deskripsi'=>'Bakso Malang adalah mi bakso khas dengan kuah bening segar, bakso kenyal, dan berbagai pelengkap seperti tahu, siomay, dan gorengan.','bahan'=>['500g daging sapi giling','100g tepung tapioka','2 putih telur','5 siung bawang putih','1 sdt merica','garam','1 liter kaldu sapi'],'langkah'=>['Haluskan bawang putih dan merica.','Campurkan daging giling dengan tepung, putih telur, dan bumbu.','Bentuk adonan menjadi bulatan-bulatan.','Rebus dalam air mendidih hingga mengapung.','Buat kuah dari kaldu sapi dengan bumbu.','Sajikan bakso dengan mie, kuah, dan pelengkap.']],
+        ];
+        foreach ($reseps as $r) Resep::create($r);
+    }
+}
